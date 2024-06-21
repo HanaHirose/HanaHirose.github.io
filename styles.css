@@ -40,6 +40,10 @@ nav ul li a {
     background-color: #e2e2e2; /* リンクの背景色を指定 */
 }
 
+h2 {
+    margin-top: 40px;  /* 上部のマージンを40pxに設定 */
+}
+
 section {
     margin: 20px 0;
     padding: 20px;
