@@ -14,7 +14,7 @@
         <h1>線形回帰</h1>
         <nav>
             <ul>
-                <li><a href="index.html">Back to Home</a></li>
+                <li><a href="index.html" class="special-link">Back to Home</a></li>
                 <!-- <li><a href="category1.html">Back to Category 1</a></li> -->
             </ul>
         </nav>
@@ -61,7 +61,7 @@
         </figure>
     </div>
     <div>
-        <h3>線形回帰の最尤推定</h3>
+        <h2>線形回帰の最尤推定</h2>
         <p>予測したい変数である目標変数\(y\)は次のように表せる。</p>
         $$ t = y(\mathbf{x},\mathbf{w}) + \epsilon $$
         <p>ただし、\(\epsilon\)は期待値が０で精度（分散の逆数）が\(\beta\)のガウス確率変数である。</p>
@@ -131,7 +131,7 @@
         $$ \frac{1}{\beta_{ML}} = \frac{1}{N} \sum_{n=1}^{N} \{ t_n - \mathbf{w}_{ML}^T \phi(\mathbf{x}_n)\}^2 $$
         <p>これにより、ノイズの精度の逆数は、回帰関数周りでの目標値の残差分散で与えられることが分かった。</p>
 
-        <h3>逐次学習（ちくじがくしゅう）</h3>
+        <h2>逐次学習（ちくじがくしゅう）</h2>
         <p>最尤法のような「バッチ学習」はパラメータの次元が大きくなると計算量が多すぎて難しくなる。
             その場合は、次のようにデータ点を一度にひとつだけ用いてモデルのパラメータを順次更新していく逐次学習（sequential learning）が用いられる。
         </p>
