@@ -76,3 +76,17 @@ figcaption {
     font-style: italic;
 }
 
+
+.special-link {
+    color: #333;  /* テキストの色を白に */
+    background-color: #e2e2e2;  /* 背景色を青に */
+    padding: 5px 10px;  /* パディングを追加 */
+    text-decoration: none;  /* 下線を消す */
+    border-radius: 5px;  /* ボーダーの角を丸くする */
+    text-align: center;
+}
+
+.special-link:hover {
+    color: blue;  
+    /* background-color: #0056b3;  ホバー時の背景色を濃い青に */
+}
