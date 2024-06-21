@@ -96,9 +96,9 @@
         <p>尤度関数の対数をとると次のように変形できる。</p>
         $$ 
         \begin{align*}
-        In p(\mathbf{t}|\mathbf{X},\mathbf{w},\beta) 
-        &= \sum_{n=1}^{N} In \mathcal{N}(t_n | \mathbf{w}^T \phi(\mathbf{x}_n),\beta^{-1}) \\
-        &= \frac{N}{2} In \beta - \frac{N}{2} In (2 \pi) - \beta E_D (\mathbf{w})
+        \In p(\mathbf{t}|\mathbf{X},\mathbf{w},\beta) 
+        &= \sum_{n=1}^{N} \In \mathcal{N}(t_n | \mathbf{w}^T \phi(\mathbf{x}_n),\beta^{-1}) \\
+        &= \frac{N}{2} \In \beta - \frac{N}{2} \In (2 \pi) - \beta E_D (\mathbf{w})
         \end{align*}
         $$
         <p>
@@ -110,7 +110,7 @@
         <h4>\(\mathbf{w}\)について</h4>
         <p>まずはパラメータ\(\mathbf{w}\)について最大化する。
             \(E_D (\mathbf{w}) \)を最大化すればいいので、\(\mathbf{w}\)について微分して勾配を求める。</p>
-        $$ \frac{\partial}{\partial \mathbf{w}} In p(\mathbf{t}|\mathbf{X},\mathbf{w},\beta)
+        $$ \frac{\partial}{\partial \mathbf{w}} \In p(\mathbf{t}|\mathbf{X},\mathbf{w},\beta)
          = \beta \sum_{n=1}^{N} \{ t_n - \mathbf{w}^T \phi(\mathbf{x}_n) \} \phi(\mathbf{x}_n)^T $$
          <p>この勾配が０になるときを考えればいいので、上記式を０とおき解くと</p>
          $$ \mathbf{w}_{ML} = \mathbf{\Phi}^{{\dag}} \mathbf{t} $$
