@@ -67,10 +67,12 @@
         <p>ただし、\(\epsilon\)は期待値が０で精度（分散の逆数）が\(\beta\)のガウス確率変数である。</p>
         <p>すなわち、条件付き確率密度はガウス分布（または正規分布、Gaussian / normal distribution）で以下のように表せる。</p>
         $$ p(t|\mathbf{x},\mathbf{w},\beta) = \mathcal{N}(t|y(\mathbf{x},\mathbf{w}, \beta^{-1}) $$
+        <h4>確率分布とは</h4>
         <p>ここで、基本事項について確認しておくと、確率分布\(p(x)\)は連続変数\(x\)において確率を考えるための概念であり、</p>
         <p>実数値\(x\)が区間\( (x, x+ \delta x) \)に入る確率が\( p(x) \delta x\)で与えられ、</p>
         $$ \int_{-\infty}^{\infty} p(x) dx = 1$$
         <p>を満たす。</p>
+        <h4>ガウス分布とは</h4>
         <p>またガウス分布は以下で定義される。</p>
         $$ \mathcal{N}(x|\mu, \sigma^2) = \frac{1}{(2\pi \sigma^2)^{1/2}} exp \{-\frac{1}{2\sigma^2}(x- \mu)^2\} $$
         <p>ただし、\(\mu\)は平均（mean）、\(\sigma^2\)は分散（variance）をあらわす。分散の逆数\(\beta = 1/ \sigma^2\)は精度パラメータと呼ばれる。</p>
@@ -80,6 +82,9 @@
             <img src="figures/Figure1.13.jpg" alt="ガウス分布" width="300">
             <figcaption>Figure 2: ガウス分布</figcaption>
         </figure>
+    </div>
+    <div>
+
     </div>
 
 
