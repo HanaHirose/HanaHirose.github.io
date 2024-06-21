@@ -3,17 +3,20 @@ body {
     padding: 10px 100px; /* 上下に10px、左右に20pxのパディングを追加 */
 }
 
-header {
+header {   
     background-color: #f8f8f8;
     padding: 10px 20px;
     text-align: center;
+    align-items: center; 
 }
 
-nav {
-    background-color: #f8f8f8; /* 背景色を指定 */
-    padding: 10px; /* パディングを追加 */
-    width: 200px; /* ナビゲーションの幅を設定 */
-}
+ nav {
+    /* background-color: #f8f8f8;  */
+    padding: 10px; 
+    /* width: 200px;  */
+    text-align: center;
+    align-items: center; 
+ } 
 
 nav h2 {
     text-align: center; /* 見出しを中央揃えに */
@@ -22,21 +25,22 @@ nav h2 {
 
 nav ul {
     list-style-type: none;
-    padding: 0;
-    margin: 0; /* マージンを無くす */
+    padding: 10px;
+    /* width: 200px; */
+   
 }
 
 nav ul li {
-    display: inline;
-    margin-right: 20px;
-    margin-bottom: 10px; /* リンク間にマージンを追加 */
+    /* display: inline; */
+    /* margin-right: 20px; */
+   
 }
 
 nav ul li a {
     text-decoration: none;
     color: #333;
-    display: block; /* リンクをブロック要素にする */
-    padding: 5px; /* リンクにパディングを追加 */
+    /* display: block;  */
+    padding: 10px;
     /* background-color: #e2e2e2; リンクの背景色を指定 */
 }
 
@@ -79,11 +83,12 @@ figcaption {
 
 .special-link {
     color: #333;  /* テキストの色を白に */
-    background-color: #e2e2e2;  /* 背景色を青に */
+    background-color: #e2e2e2;  
     padding: 5px 10px;  /* パディングを追加 */
     text-decoration: none;  /* 下線を消す */
     border-radius: 5px;  /* ボーダーの角を丸くする */
     text-align: center;
+    align-items: center; 
 }
 
 .special-link:hover {
