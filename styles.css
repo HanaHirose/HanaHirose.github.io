@@ -37,3 +37,16 @@ footer {
 }
 
 
+.gallery {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+}
+figure {
+    margin: 0 10px; /* 各figureの左右のマージン */
+}
+figcaption {
+    text-align: center;
+    font-style: italic;
+}
+
