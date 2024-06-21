@@ -21,10 +21,14 @@
     </header>
     <div>
         <h2>線形回帰とは</h2>
-        <p>\(\mathbf{X} \in \mathbb{R}^D, \mathbf{t} \in \mathbb{R} \)</p>
-        <p>ここで\mathbf{X}は説明変数（入力）、\mathbf{t}は応答変数、目的変数（出力）</p>
-        <h2>回帰問題：やりたいこと</h2>
-        <p>\mathbf{N}個の観測データ\( {(\mathbf{x}_1,\mathbf{t}_1),(\mathbf{x}_2,\mathbf{t}_2), ... ,(\mathbf{x}_N,\mathbf{t}_N) \)から\mathbf{X}と\mathbf{t}の関係をモデル化したい</p>
+        <p>\(\mathbf{x} \in \mathbb{R}^D, \mathbf{t} \in \mathbb{R} \)</p>
+        <p>ここで\(\mathbf{x}\)は説明変数（入力）、\(\mathbf{t}\)は応答変数、目的変数（出力）</p>
+        <h3>回帰問題：やりたいこと</h3>
+        <p>\(\mathbf{N}\)個の観測データ\( \{(\mathbf{x}_1,\mathbf{t}_1),(\mathbf{x}_2,\mathbf{t}_2), \dots ,(\mathbf{x}_N,\mathbf{t}_N) \} \)から\(\mathbf{X} \)と\(\mathbf{t}\)の関係をモデル化したい</p>
+        <h3>線形回帰（Linear Regression）</h3>
+        <p>最も単純な線形回帰モデルは入力変数の線形結合</p>
+        $$ y(\mathbf{x},\mathbf{w}=w_0 + w_1 x_1 + w_2 x_2 + \dots + \w_D \x_D) $$
+        <p>と表せる。ここで重要なのは、これはパラメータ\( \mathbf{w} \)に関して線形結合になっているという点である。だから"線形"回帰と呼ぶ。</p>
     </div>
     <footer>
         <p>© 2024 Hana Hirose. All rights reserved.</p>
