@@ -37,6 +37,14 @@
         <p>ここで、パラメータ\( \mathbf{w} = ( w_0, \dots, w_{M-1} )^T\)、基底関数 \(\phi = (\phi_0, \dots, \phi_{M-1}) \)である。<br />
         （\(\mathbf{x}\)自体はD次元だが、\(\mathbf{x}\)で構成された既定関数\(\phi\)は異なるM次元をもって良いことに注意）
         </p>
+        <p>基底関数として\( \mathbf{x} \)の多項式を取るものの他に、
+            よく使われる基底関数としては、例えば、以下のようなガウス基底関数がある。</p>
+        $$ \phi_j(x) = exp\{-frac{(x-\mu_j)^2)}{2s^2} \} $$
+        <p>他には、次のようなシグモイド基底関数もある。</p>
+        $$ \phi_j(x) = \frac{1}{1+ exp(\frac{x-\mu_j}{s})} $$
+        <p>ただし、次の関数はロジスティックシグモイド関数（logistic sigmoid function）とよばれる。</p>
+        $$ \sigma (a) = \frac{1}{1+ exp(-a)} $$
+        <p>以下に各基底関数の様子を示す。（C.M. Bishop, PRML, 2006）</p>
     </div>
     <div class="gallery">
         <figure>
