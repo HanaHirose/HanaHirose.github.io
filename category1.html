@@ -96,9 +96,9 @@
         <p>尤度関数の対数をとると次のように変形できる。</p>
         $$ 
         \begin{align*}
-        \In p(\mathbf{t}|\mathbf{X},\mathbf{w},\beta) 
-        &= \sum_{n=1}^{N} \In \mathcal{N}(t_n | \mathbf{w}^T \phi(\mathbf{x}_n),\beta^{-1}) \\
-        &= \frac{N}{2} \In \beta - \frac{N}{2} \In (2 \pi) - \beta E_D (\mathbf{w})
+        \ln p(\mathbf{t}|\mathbf{X},\mathbf{w},\beta) 
+        &= \sum_{n=1}^{N} \ln \mathcal{N}(t_n | \mathbf{w}^T \phi(\mathbf{x}_n),\beta^{-1}) \\
+        &= \frac{N}{2} \ln \beta - \frac{N}{2} \ln (2 \pi) - \beta E_D (\mathbf{w})
         \end{align*}
         $$
         <p>
@@ -108,23 +108,23 @@
         <p>によって定義される。</p>
         <p>こう書き下すことで、これを最大化するパラメータ\(\mathbf{w}, \beta^{-1}\)を求められる。</p>
 
-        <h4>パラメータ\(\mathbf{w}\)の推定/h4>
+        <h4>パラメータ\(\mathbf{w}\)の推定</h4>
         <p>まずはパラメータ\(\mathbf{w}\)について最大化する。
             \(E_D (\mathbf{w}) \)を最大化すればいいので、\(\mathbf{w}\)について微分して勾配を求める。</p>
-        $$ \frac{\partial}{\partial \mathbf{w}} \In p(\mathbf{t}|\mathbf{X},\mathbf{w},\beta)
+        $$ \frac{\partial}{\partial \mathbf{w}} \ln p(\mathbf{t}|\mathbf{X},\mathbf{w},\beta)
          = \beta \sum_{n=1}^{N} \{ t_n - \mathbf{w}^T \phi(\mathbf{x}_n) \} \phi(\mathbf{x}_n)^T $$
          <p>この勾配が０になるときを考えればいいので、上記式を０とおき解くと</p>
-         $$ \mathbf{w}_{ML} = \mathbf{\Phi}^{{\dag}} \mathbf{t} $$
+         $$ \mathbf{w}_{ML} = \mathbf{\Phi}^{{\dagger}} \mathbf{t} $$
          <p>を得る。これは最小二乗問題の正規方程式（normal equation）として知られる。
             ここで、\( N \times M \)行列\(\mathbf{\Phi} \)は計画行列（design matrix）と呼ばれ、
             要素は\( \Phi_{nj} = \phi_j(\mathbf{x}_n) \)で与えられる。</p>
         <p>
-            また、\(\mathbf{\Phi}^{{\dag}} \)は
+            また、\(\mathbf{\Phi}^{{\dagger}} \)は
         </p>
-        $$ \mathbf{\Phi}^{{\dag}} =(\mathbf{\Phi}^T \mathbf{\Phi})^{-1} \mathbf{\Phi}^T $$
+        $$ \mathbf{\Phi}^{{\dagger}} =(\mathbf{\Phi}^T \mathbf{\Phi})^{-1} \mathbf{\Phi}^T $$
         <p>で定義され、ムーア・ペンローズの疑似行列（Moore-Penrose pseudo-inverse matrix）と呼ばれる。
             これは通常の逆行列の概念を非正方行列に拡張したものとみなせる。
-            実際、\( \mathbf{\Phi}\)が正方行列の時、\(\mathbf{\Phi}^{{\dag}} = \mathbf{\Phi}^{-1}\)が成り立つ。
+            実際、\( \mathbf{\Phi}\)が正方行列の時、\(\mathbf{\Phi}^{{\dagger}} = \mathbf{\Phi}^{-1}\)が成り立つ。
         </p>
         <h4>ノイズパラメータ\(\beta\)の推定</h4>
         <p>同様にパラメータ\(\beta\)について勾配を求めてそれを０と置くことで、尤度関数を最大化する\(\beta\)を求めるとができる。</p>
