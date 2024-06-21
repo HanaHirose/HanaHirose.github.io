@@ -1,1 +1,58 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Topic 1</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
+</head>
+<body>
+    <header>
+        <h1>ロジスティック回帰</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html" class="special-link">Back to Home</a></li>
+            </ul>
+        </nav>
+        <nav>
+            <ul>
+                <li><a href="category1.html" >＜前へ：線形回帰</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div>
+        <h2>ロジスティック回帰とは</h2>
+        <h3>２クラス分類問題</h3>
+        <p>入力\(\mathbf{x}\in \mathbb{R}^D\)に対して、
+            yes / No に対応する出力\(t \in \{ 0,1\} \)を与える問題を２クラス分類問題と呼ぶ。</p>
+        <p>クラス\( C_1\)の事後確率は</p>
+        $$ p (C_1 | \Phi) = y(\Phi) = \sigma( \mathbf{w}^T \Phi) $$
+        <p>と書ける。ここで\(\sigma( \mathbf{w}^T \Phi) \)は次のように定義されるロジスティックシグモイド関数である。</p>
+        $$ \sigma(a) = \frac{1}{1+ exp(-a)} $$
+    </div>
+    <div class="gallery">
+        <figure>
+            <img src="figures/Figure4.9.jpg" alt="ロジスティックシグモイド関数" width="300">
+            <figcaption>Figure 1: ロジスティックシグモイド関数（C.M. Bishop, PRML, 2006）</figcaption>
+        </figure>
+    </div>
+    <div>
+        <p>このモデルを使って分類する方法をロジスティック回帰と呼ぶ。</p>
+        <h3>多クラス分類問題</h3>
+        <p>出力がyes / noだけでなく３クラス以上で分類したい場合は、クラス数を\(K\)とし、クラスラベルを\(C_1,C_2, \dots C_K\)とする。
+            入力\(\mathbf{x}\)がクラス\(C_k\)に分類される事後確率は
+        </p>
+        $$ p (C_k | \Phi) = y_k(\Phi) = \frac{exp(a_k)}{\Sigma_{j}exp(a_j)} $$
+        <p>で与えらえる。このモデル化は多項ロジスティック回帰と呼ばれる。ただし、「活性」\(a_k\)は</p>
+        $$ a_k = \mathbf{w}_k^T\Phi \quad (k = 1, 2 , \dots , K) $$
+        <p>で与えられる。</p>
+    </div>
+
+    <footer>
+        <p>© 2024 Hana Hirose. All rights reserved.</p>
+    </footer>
+</body>
+</html>
