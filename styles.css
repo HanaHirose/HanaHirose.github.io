@@ -37,7 +37,11 @@ nav ul li a {
     color: #333;
     display: block; /* リンクをブロック要素にする */
     padding: 5px; /* リンクにパディングを追加 */
-    background-color: #e2e2e2; /* リンクの背景色を指定 */
+    /* background-color: #e2e2e2; リンクの背景色を指定 */
+}
+
+nav ul li a:hover {
+    color: blue;  
 }
 
 h2 {
