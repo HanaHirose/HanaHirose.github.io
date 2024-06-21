@@ -27,7 +27,7 @@
         <p>\(\mathbf{N}\)個の観測データ\( \{(\mathbf{x}_1,\mathbf{t}_1),(\mathbf{x}_2,\mathbf{t}_2), \dots ,(\mathbf{x}_N,\mathbf{t}_N) \} \)から\(\mathbf{x} \)と\(\mathbf{t}\)の関係をモデル化したい</p>
         <h3>線形回帰（Linear Regression）</h3>
         <p>最も単純な線形回帰モデルは入力変数の線形結合で\(\mathbf{t}\)を予測できるような関数\(y(\mathbf{x})\)を次のように構成することである。</p>
-        $$ y(\mathbf{x},\mathbf{w}=w_0 + w_1 x_1 + w_2 x_2 + \dots + w_D x_D) $$
+        $$ y(\mathbf{x},\mathbf{w})=w_0 + w_1 x_1 + w_2 x_2 + \dots + w_D x_D $$
         <p>ここで重要なのは、これはパラメータ\( \mathbf{w} \)に関して線形結合になっているという点である。だから"線形"回帰と呼ぶ。</p>
         <h3>線形基底関数モデルへの拡張</h3>
         <p>先ほどのままでは\(\mathbf{x} \)についても線形結合になっているため、表現力に乏しいモデルになっている。<br />
@@ -39,12 +39,12 @@
         </p>
         <p>基底関数として\( \mathbf{x} \)の多項式を取るものの他に、
             よく使われる基底関数としては、例えば、以下のようなガウス基底関数がある。</p>
-        $$ \phi_j(x) = exp\{-frac{(x-\mu_j)^2)}{2s^2} \} $$
+        $$ \phi_j(x) = exp\{-\frac{(x-\mu_j)^2)}{2s^2} \} $$
         <p>他には、次のようなシグモイド基底関数もある。</p>
         $$ \phi_j(x) = \frac{1}{1+ exp(\frac{x-\mu_j}{s})} $$
         <p>ただし、次の関数はロジスティックシグモイド関数（logistic sigmoid function）とよばれる。</p>
         $$ \sigma (a) = \frac{1}{1+ exp(-a)} $$
-        <p>以下に各基底関数の様子を示す。（C.M. Bishop, PRML, 2006）</p>
+        <p>以下に各基底関数の様子を示す。（図：C.M. Bishop, PRML, 2006）</p>
     </div>
     <div class="gallery">
         <figure>
