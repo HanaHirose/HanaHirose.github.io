@@ -80,18 +80,20 @@
     <div class="gallery">
         <figure>
             <img src="figures/Figure1.13.jpg" alt="ガウス分布" width="300">
-            <figcaption>Figure 2: ガウス分布</figcaption>
+            <figcaption>Figure 2: ガウス分布（C.M. Bishop, PRML, 2006）</figcaption>
         </figure>
     </div>
     <div>
         <h4>最尤推定について</h4>
         <p>本題に戻って、\(y(\mathbf{x},\mathbf{w})\)は以下のように表せる。</p>
-        $$ y(\mathbf{x},\mathbf{w}) = \mathbb{E}[t|\mathbf{x}] = \int t p(t|\mathbf{x}) dt
+        $$ y(\mathbf{x},\mathbf{w}) = \mathbb{E}[t|\mathbf{x}] = \int t p(t|\mathbf{x}) dt $$
         <p>ここで与えられたデータ\( \{ (\mathbf{x}_1,t_1),(\mathbf{x}_2,t_2), \dots, (\mathbf{x}_N,t_N) \} \)
             に対するもっともらしさとして次のような尤度関数（ゆうどかんすう）を考える。
         </p>
-        $$ p(\mathbf{t}|\mathbf{X},\mathbf{w},\beta) = \prod_{n=1}^{N} \mathcal{N}(t_n | \mathbf{w}^T \phi(\mathbf{x}_n),\beta^{-1})
+        $$ p(\mathbf{t}|\mathbf{X},\mathbf{w},\beta) = \prod_{n=1}^{N} \mathcal{N}(t_n | \mathbf{w}^T \phi(\mathbf{x}_n),\beta^{-1}) $$
         <p>与えられたデータ\(\mathbf{X},\mathbf{t}\)に対してこの尤度関数を最大化するようにパラメータ\(\mathbf{w}, \beta^{-1}\)を求める。</p>
+        <h4>ガウスモデルの最尤法は最小二乗法</h4>
+
     </div>
 
 
