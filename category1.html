@@ -14,7 +14,7 @@
         <h1>線形回帰</h1>
         <nav>
             <ul>
-                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html">Back to Home</a></li>
                 <!-- <li><a href="category1.html">Back to Category 1</a></li> -->
             </ul>
         </nav>
@@ -24,11 +24,18 @@
         <p>\(\mathbf{x} \in \mathbb{R}^D, \mathbf{t} \in \mathbb{R} \)</p>
         <p>ここで\(\mathbf{x}\)は説明変数（入力）、\(\mathbf{t}\)は応答変数、目的変数（出力）</p>
         <h3>回帰問題：やりたいこと</h3>
-        <p>\(\mathbf{N}\)個の観測データ\( \{(\mathbf{x}_1,\mathbf{t}_1),(\mathbf{x}_2,\mathbf{t}_2), \dots ,(\mathbf{x}_N,\mathbf{t}_N) \} \)から\(\mathbf{X} \)と\(\mathbf{t}\)の関係をモデル化したい</p>
+        <p>\(\mathbf{N}\)個の観測データ\( \{(\mathbf{x}_1,\mathbf{t}_1),(\mathbf{x}_2,\mathbf{t}_2), \dots ,(\mathbf{x}_N,\mathbf{t}_N) \} \)から\(\mathbf{x} \)と\(\mathbf{t}\)の関係をモデル化したい</p>
         <h3>線形回帰（Linear Regression）</h3>
-        <p>最も単純な線形回帰モデルは入力変数の線形結合</p>
-        $$ y(\mathbf{x},\mathbf{w}=w_0 + w_1 x_1 + w_2 x_2 + \dots + \w_D \x_D) $$
-        <p>と表せる。ここで重要なのは、これはパラメータ\( \mathbf{w} \)に関して線形結合になっているという点である。だから"線形"回帰と呼ぶ。</p>
+        <p>最も単純な線形回帰モデルは入力変数の線形結合で\(\mathbf{t}\)を予測できるような関数\(y(\mathbf{x})\)を次のように構成することである。</p>
+        $$ y(\mathbf{x},\mathbf{w}=w_0 + w_1 x_1 + w_2 x_2 + \dots + w_D x_D) $$
+        <p>ここで重要なのは、これはパラメータ\( \mathbf{w} \)に関して線形結合になっているという点である。だから"線形"回帰と呼ぶ。</p>
+        <h3>線形基底関数モデルへの拡張</h3>
+        <p>先ほどのままでは\(\mathbf{x} \)についても線形結合になっているため、表現力に乏しいモデルになっている。<br />
+            そこで、入力変数に関して非線形な関数の線形結合を考えることで、このモデルを次のように拡張することができる。
+        </p>
+        $$ y (\mathbf{x},\mathbf{w}) = \sum_{j=0}^{M-1} w_j \phi_j(\mathbf{x}) = \mathbf{w}^T \phi(\mathbf{x}) $$
+        ここで、\( \mathbf{w} = ( w_0, \dots, w_{M-1} )^T, \phi = (\phi_0, \dots, \phi_{M-1}) \)である。
+        （\(\mathbf{x}\)自体はD次元だが、（\(\mathbf{x}\)で構成された既定関数\(\phi\)は異なるM次元をもって良いことに注意）
     </div>
     <footer>
         <p>© 2024 Hana Hirose. All rights reserved.</p>
