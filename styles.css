@@ -9,19 +9,35 @@ header {
     text-align: center;
 }
 
+nav {
+    background-color: #f8f8f8; /* 背景色を指定 */
+    padding: 10px; /* パディングを追加 */
+    width: 200px; /* ナビゲーションの幅を設定 */
+}
+
+nav h2 {
+    text-align: center; /* 見出しを中央揃えに */
+    margin-top: 0; /* 上のマージンを無くす */
+}
+
 nav ul {
     list-style-type: none;
     padding: 0;
+    margin: 0; /* マージンを無くす */
 }
 
 nav ul li {
     display: inline;
     margin-right: 20px;
+    margin-bottom: 10px; /* リンク間にマージンを追加 */
 }
 
 nav ul li a {
     text-decoration: none;
     color: #333;
+    display: block; /* リンクをブロック要素にする */
+    padding: 5px; /* リンクにパディングを追加 */
+    background-color: #e2e2e2; /* リンクの背景色を指定 */
 }
 
 section {
