@@ -107,7 +107,8 @@
         $$ E_D (\mathbf{w}) = \frac{1}{2} \sum_{n=1}^{N} \{ t_n - \mathbf{w}^T \phi(\mathbf{x}_n) \}^2 $$
         <p>によって定義される。</p>
         <p>こう書き下すことで、これを最大化するパラメータ\(\mathbf{w}, \beta^{-1}\)を求められる。</p>
-        <h4>\(\mathbf{w}\)について</h4>
+
+        <h4>パラメータ\(\mathbf{w}\)の推定/h4>
         <p>まずはパラメータ\(\mathbf{w}\)について最大化する。
             \(E_D (\mathbf{w}) \)を最大化すればいいので、\(\mathbf{w}\)について微分して勾配を求める。</p>
         $$ \frac{\partial}{\partial \mathbf{w}} \In p(\mathbf{t}|\mathbf{X},\mathbf{w},\beta)
@@ -125,6 +126,10 @@
             これは通常の逆行列の概念を非正方行列に拡張したものとみなせる。
             実際、\( \mathbf{\Phi}\)が正方行列の時、\(\mathbf{\Phi}^{{\dag}} = \mathbf{\Phi}^{-1}\)が成り立つ。
         </p>
+        <h4>ノイズパラメータ\(\beta\)の推定</h4>
+        <p>同様にパラメータ\(\beta\)について勾配を求めてそれを０と置くことで、尤度関数を最大化する\(\beta\)を求めるとができる。</p>
+        $$ \frac{1}{\beta_{ML}} = \frac{1}{N} \sum_{n=1}^{N} \{ t_n - \mathbf{w}_{ML}^T \phi(\mathbf{x}_n)\}^2 $$
+        <p>これにより、ノイズの精度の逆数は、回帰関数周りでの目標値の残差分散で与えられることが分かった。</p>
     </div>
 
 
