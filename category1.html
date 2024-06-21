@@ -96,8 +96,8 @@
         <p>尤度関数の対数をとると次のように変形できる。</p>
         $$ 
         \begin{align*}
-        p(\mathbf{t}|\mathbf{X},\mathbf{w},\beta) 
-        &= \sum_{n=1}^{N} \mathcal{N}(t_n | \mathbf{w}^T \phi(\mathbf{x}_n),\beta^{-1}) \\
+        In p(\mathbf{t}|\mathbf{X},\mathbf{w},\beta) 
+        &= \sum_{n=1}^{N} In \mathcal{N}(t_n | \mathbf{w}^T \phi(\mathbf{x}_n),\beta^{-1}) \\
         &= \frac{N}{2} In \beta - \frac{N}{2} In (2 \pi) - \beta E_D (\mathbf{w})
         \end{align*}
         $$
@@ -106,7 +106,13 @@
         </p>
         $$ E_D (\mathbf{w}) = \frac{1}{2} \sum_{n=1}^{N} \{ t_n - \mathbf{w}^T \phi(\mathbf{x}_n) \}^2 $$
         <p>によって定義される。</p>
-        <p>こう書き下すことで、</p>
+        <p>こう書き下すことで、これを最大化するパラメータ\(\mathbf{w}, \beta^{-1}\)を求められる。</p>
+        <h4>\(\mathbf{w}\)について</h4>
+        <p>まずはパラメータ\(\mathbf{w}\)について最大化する。
+            \(E_D (\mathbf{w}) \)を最大化すればいいので、\(\mathbf{w}\)について微分して勾配を求める。</p>
+        $$ frac{\partial}{\partial \mathbf{w}} In p(\mathbf{t}|\mathbf{X},\mathbf{w},\beta)
+         = \beta \sum_{n=1}^{N} \{ t_n - \mathbf{w}^T \phi(\mathbf{x}_n) \} \phi(\mathbf{x}_n)^T $$
+         <p>この勾配が０になるときを考えればいいので、上記式を０とおき解くと</p>
     </div>
 
 
