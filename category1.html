@@ -93,7 +93,18 @@
         $$ p(\mathbf{t}|\mathbf{X},\mathbf{w},\beta) = \prod_{n=1}^{N} \mathcal{N}(t_n | \mathbf{w}^T \phi(\mathbf{x}_n),\beta^{-1}) $$
         <p>与えられたデータ\(\mathbf{X},\mathbf{t}\)に対してこの尤度関数を最大化するようにパラメータ\(\mathbf{w}, \beta^{-1}\)を求める。</p>
         <h4>ガウスモデルの最尤法は最小二乗法</h4>
-
+        <p>尤度関数の対数をとると次のように変形できる。</p>
+        $$ 
+        \begin{align*}
+        p(\mathbf{t}|\mathbf{X},\mathbf{w},\beta) = \sum_{n=1}^{N} \mathcal{N}(t_n | \mathbf{w}^T \phi(\mathbf{x}_n),\beta^{-1}) \\
+        &= \frac{N}{2} In \beta - \frac{N}{2} In (2 \pi) - \beta E_D (\mathbf{w})
+        \end{align*}
+        $$
+        <p>
+            ただし、二乗和誤差関数は
+        </p>
+        $$ E_D (\mathbf{w}) = \frac{1}{2} \sum_{n=1}^{N} \{ t_n - \mathbf{w}^T \phi(\mathbf{x}_n) \}^2 $$
+        <p>によって定義される。</p>
     </div>
 
 
