@@ -113,6 +113,17 @@
         $$ frac{\partial}{\partial \mathbf{w}} In p(\mathbf{t}|\mathbf{X},\mathbf{w},\beta)
          = \beta \sum_{n=1}^{N} \{ t_n - \mathbf{w}^T \phi(\mathbf{x}_n) \} \phi(\mathbf{x}_n)^T $$
          <p>この勾配が０になるときを考えればいいので、上記式を０とおき解くと</p>
+         $$ \mathbf{w}_{ML} = \mathbf{\Phi}^{\dag} \mathbf{t} $$
+         <p>を得る。これは最小二乗問題の正規方程式（normal equation）として知られる。
+            ここで、\( N \times M \)行列\(\mathbf{\Phi} \)は計画行列（design matrix）と呼ばれ、要素は\( \Phi_{nj} = \phi_j(\mathbf{x}_n)で与えられる。</p>
+        <p>
+            また、\(\mathbf{\Phi}^{\dag} \)は
+        </p>
+        $$ \mathbf{\Phi}^{\dag} =(\mathbf{\Phi}^T \mathbf{\Phi})^{-1} \mathbf{\Phi}^T $$
+        <p>で定義され、ムーア・ペンローズの疑似行列（Moore-Penrose pseudo-inverse matrix）と呼ばれる。
+            これは通常の逆行列の概念を非正方行列に拡張したものとみなせる。
+            実際、\( \mathbf{\Phi}\)が正方行列の時、\(\mathbf{\Phi}^{\dag} = \mathbf{\Phi}^{-1}\)が成り立つ。
+        </p>
     </div>
 
 
