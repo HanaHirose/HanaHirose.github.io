@@ -49,6 +49,7 @@
         <p>これは、データに関する誤差関数に適当な罰金項（penalty）を以下のように追加し、最適化する。</p>
         $$ E_D(\mathbf{w}) + \lambda E_W(\mathbf{w}) $$
         <p>ただし、\(\lambda\)は正則化係数で、データに関する誤差の項と正則化項をどれくらい重視するかの比重を決めるものであり、手で決める。</p>
+        <h3>線形回帰モデルでの正則化の一例</h3>
         <p>線形回帰モデルで二乗和誤差関数を用いて、
             正則化はもっとも単純な形としてパラメータ\(\mathbf{w}\)の二乗和を用いるとしたら、誤差関数全体は</p>
         $$ E_D(\mathbf{w}) + \lambda E_W(\mathbf{w}) = \frac{1}{2}\sum_{n=1}^{N} \{ t_n-\mathbf{w}^T \Phi(\mathbf{x}_n)  \}^2 + \frac{\lambda}{2} \mathbf{w}^T \mathbf{w} $$
@@ -57,8 +58,10 @@
         <p>この誤差関数において\(\mathbf{w}\)について勾配をとって０とおいて解くことで、</p>
         $$ \mathbf{w} = (\lambda \mathbf{I} + \mathbf{\Phi}^T\mathbf{\Phi})^{-1} \mathbf{\Phi}^T \mathbf{t} $$
         <p>
-            が得られる。また、先ほどの正則化項をより一般化して、
+            が得られる。
         </p>
+        <h3>正則化の一般化（\(l_q\)ノルム）</h3>
+        <p>また、先ほどの正則化項をより一般化して、</p>
         $$ \lambda E_W(\mathbf{w}) = \frac{\lambda}{2} \sum_{j=1}^{M} |w_j|^q $$
         <p>
             と書くことができる。\(q=2\)のときが先ほどの形である。これを\(l_2\)ノルムと呼び、
@@ -73,9 +76,60 @@
             </figure>
         </div>
         
+        <div>
+            <h3>\(l_1\)ノルムでのLASSO</h3>
+            <p>とくに\(q=1\)の時をLASSOと呼ぶ。</p>
+            <p>LASSOはスパース解を誘導する。つまり、いくつかの係数\(w_j\)が０になり、疎な解が得られる。
+                このとき当然ながら０になる係数に対応する基底関数は予測に影響を及ぼさない。</p>
+
+            <p>以下でスパース解を誘導するLASSO（\(q=1\)）とそうでない\(q=2\)の場合を比較する。
+            </p>
+            <p>
+                以下の図では、\(\mathbf{w}\)が二次元の場合を考えて、視覚的にわかりやすい場合を考えている。
+                \(E_D(\mathbf{w})\)でこの場合二乗和誤差である。
+                等高線の中心の点の時、この項は最小値をとり、等高線が広がるにつれて大きくなってしまう。
+                一方、正方形か円の色のついた範囲は正則化項が取れる範囲であり、
+                この中で最もメインの誤差関数\(E_D(\mathbf{w})\)が小さくなる点となる\(\mathbf{w}\)が最適値である。
+            </p>
+            <p>
+                この図を見てわかる通り、色のついた範囲と等高線の交わるポイントである最適値\(\mathbf{w}\)をみると、
+                LASSOのときは縦軸\(w_2\)が０になっている（スパース解）ことが分かる。
+                このように、図から直感的にLASSOがスパース解を誘導することを確認できる。
+            </p>
+
+        </div>
+
+        <div class="image-grid">
+            <figure>
+                <img src="figures/Figure3.4b.jpg" alt="q1">
+            </figure>
+            <figure>
+                <img src="figures/Figure3.4a.jpg" alt="q2">
+            </figure>
+
+            <p class="gallery-caption">Figure 2: LASSO（左）と\(q=2\)（右）。（C.M. Bishop, PRML, 2006）</p>
+        </div>
+
+        <p>このように正則化項を誤差関数に付け加えることで、複雑なモデルを用いる場合の過学習を防ぐことができる。
+            しかし、適切に\(\lambda\)を決める必要がある。
+            いいかえれば、適切な基底関数の数を求める問題を正則化係数\(\lambda\)を適切に決める問題に置き換えただけである。  
+        </p>
+        <p>正則化係数をどのように決めるかはこの後議論していく。</p>
+
     </div>
 
     <footer>
+        <nav>
+            <ul>
+                <li><a href="LogisticRegression.html" >＜前へ：ロジスティック回帰</a></li>
+            </ul>
+        </nav>
+        <nav>
+            <ul>
+                <li><a href="index.html" class="special-link">Back to Home</a></li>
+            </ul>
+        </nav>
+
         <p>© 2024 Hana Hirose. All rights reserved.</p>
     </footer>
 </body>
