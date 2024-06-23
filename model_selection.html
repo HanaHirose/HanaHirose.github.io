@@ -1,0 +1,79 @@
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Topic 1</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+</head>
+<body>
+
+    <header>
+        <h1>正則化</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html" class="special-link">Back to Home</a></li>
+            </ul>
+        </nav>
+        <nav>
+            <ul>
+                <li><a href="regularization.html" >＜前へ：正則化</a></li>
+            </ul>
+        </nav>
+    </header>
+
+
+    <div>
+        <h2>モデル、ハイパーパラメータの選択</h2>
+        <p>
+            モデルが多項式の場合、何次式にしてどれくらいモデルを複雑にするのがいいのかという疑問がある。
+            また、正則化したときには正則化係数\(\lambda\)を決める必要があるし、
+            ニューラルネットワークなどのもっと複雑なモデルでは複雑さを支配する複数のパラメータがありえる。
+        </p>
+        <p>
+            新しいデータに対して良い予想ができるようにそのようなパラメータあを決めたい。
+            また、異なるモデル同士を比較して、どれが一番よさそうか知りたい。
+        </p>
+        <p>
+            誤差と言ったときに、次の３つの誤差について区別して考える必要がある。
+            まず、手元にあるデータへの誤差として訓練誤差\(E_{train}(\lambda)\)がある。
+            モデルの良さを表すのに本質的なのは、手元にない道のデータへの誤差である汎用誤差\(E_{gen}(\lambda)\)である。
+            学習の目的はこの汎化誤差をなるべく下げることである。
+            しかし、この値は知ることはできないので、代わりに手元にあるデータをもちいて以下のように検証誤差\(E_{valild}(\lambda)\)を評価する。
+        </p>
+        <p>
+            訓練データでは過学習などが起こりえるし、良い予測ができるのは当たり前である。
+            そこで、最適なハイパーパラメータを決めるために、確認用集合（検証用集合）を用いて、
+            最終的にどのモデルがよいか比較、決定するためにテスト集合を別に用意しておくことが理想的である。
+        </p>
+        <p>
+            しかし、実際にはデータが十分リッチにあるとは限らないので、訓練、検証、テストの3分割を行う代わりに、次のような工夫が行われる。
+        </p>
+
+        <h3>K-fold 交差検証法</h3>
+        <p>これは一番よく用いられる方法である。</p>
+        <p>データをＫ個のサブセットに分け、Ｋ－１個のサブセットを用いて訓練を行い、残りの１セットで誤差を評価する。
+            この操作をＫ通りすべてに行い、Ｋ個の誤差の平均を検証誤差とする。</p>
+        <h3>LOO法（leave-one-out method）</h3>
+        <p>特にKをデータ点の数Nとしたときは、1個抜き法、LOO法と呼ばれる。データが特に少ないとき、このようにする。</p>
+
+    </div>
+
+    <footer>
+        <nav>
+            <ul>
+                <li><a href="regularization.html" >＜前へ：正則化</a></li>
+            </ul>
+        </nav>
+        <nav>
+            <ul>
+                <li><a href="index.html" class="special-link">Back to Home</a></li>
+            </ul>
+        </nav>
+
+        <p>© 2024 Hana Hirose. All rights reserved.</p>
+    </footer>
+</body>
+</html>
