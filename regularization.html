@@ -10,7 +10,7 @@
 </head>
 <body>
     <header>
-        <h1>ロジスティック回帰</h1>
+        <h1>正則化</h1>
         <nav>
             <ul>
                 <li><a href="index.html" class="special-link">Back to Home</a></li>
@@ -27,7 +27,53 @@
         <h3>過適合（over-fitting）</h3>
         <p>訓練データの数\(N\)に比べてパラメータ数\(M\)が多すぎると過適合（over-fitting）が起きてしまう。</p>
     </div>
+    <div class="image-grid">
+        <figure>
+            <img src="figures/Figure1.4a.jpg" alt="1.4a">
+        </figure>
+        <figure>
+            <img src="figures/Figure1.4b.jpg" alt="1.4b">
+        </figure>
+        <figure>
+            <img src="figures/Figure1.4c.jpg" alt="1.4c">
+        </figure>
+        <figure>
+            <img src="figures/Figure1.4d.jpg" alt="1.4d">
+        </figure>
+        <p class="gallery-caption">Figure 1: \(N=10\)個の訓練データ（青い丸）に対して\(M\)次の多項式でフィットした様子（赤線）。（C.M. Bishop, PRML, 2006）</p>
+    </div>
 
+    <div>
+        <h2>正則化</h2>
+        <p>過学習の現象を制御するために使われるテクニックとして正則化がある。</p>
+        <p>これは、データに関する誤差関数に適当な罰金項（penalty）を以下のように追加し、最適化する。</p>
+        $$ E_D(\mathbf{w}) + \lambda E_W(\mathbf{w}) $$
+        <p>ただし、\(\lambda\)は正則化係数で、データに関する誤差の項と正則化項をどれくらい重視するかの比重を決めるものであり、手で決める。</p>
+        <p>線形回帰モデルで二乗和誤差関数を用いて、
+            正則化はもっとも単純な形としてパラメータ\(\mathbf{w}\)の二乗和を用いるとしたら、誤差関数全体は</p>
+        $$ E_D(\mathbf{w}) + \lambda E_W(\mathbf{w}) = \frac{1}{2}\sum_{n=1}^{N} \{ t_n-\mathbf{w}^T \Phi(\mathbf{x}_n)  \}^2 + \frac{\lambda}{2} \mathbf{w}^T \mathbf{w} $$
+        <p>と表せる。正則化項の選び方は機械学習の分野では荷重減衰（weight decay）と呼ばれる。
+            なぜなら、逐次学習したときに必要ないパラメータ（重み）が減衰して０に近づいていくからである。</p>
+        <p>この誤差関数において\(\mathbf{w}\)について勾配をとって０とおいて解くことで、</p>
+        $$ \mathbf{w} = (\lambda \mathbf{I} + \mathbf{\Phi}^T\mathbf{\Phi})^{-1} \mathbf{\Phi}^T \mathbf{t} $$
+        <p>
+            が得られる。また、先ほどの正則化項をより一般化して、
+        </p>
+        $$ \lambda E_W(\mathbf{w}) = \frac{\lambda}{2} \sum_{j=1}^{M} |w_j|^q $$
+        <p>
+            と書くことができる。\(q=2\)のときが先ほどの形である。これを\(l_2\)ノルムと呼び、
+            先ほど見た通り\(l_2\)ノルムでの正則化のメリットは線形回帰に対して解析的に\(\mathbf{w}\)を求められることである。
+        </p>
+        <p>さまざまな\(q\)に対する正則化項のグラフは以下の通りである。</p>
+
+        <div class="gallery">
+            <figure>
+                <img src="figures/Figure3.3.jpg" alt="ノルム" width="500">
+                <figcaption>Figure 2: 様々なノルムでの正則化項のグラフの様子（C.M. Bishop, PRML, 2006）</figcaption>
+            </figure>
+        </div>
+        
+    </div>
 
     <footer>
         <p>© 2024 Hana Hirose. All rights reserved.</p>

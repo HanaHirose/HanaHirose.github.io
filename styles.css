@@ -81,6 +81,31 @@ figcaption {
 }
 
 
+.image-grid {
+    display: flex;
+    flex-wrap: wrap; /* コンテナの幅を超えたら折り返す */
+    justify-content: space-between; /* 画像間に均等なスペースを配置 */
+    align-items: flex-start; /* 行間に均等なスペースを配置 */
+}
+
+.image-grid figure {
+    width: 40%; /* コンテナ幅の約半分を画像に割り当て */
+    margin-bottom: 10px; /* 下にマージンを設定 */
+}
+
+.image-grid img {
+    width: 100%; /* 画像をfigureの幅に合わせて拡大/縮小 */
+    height: auto; /* 画像の高さを自動調整 */
+}
+
+.gallery-caption {
+    width: 100%; /* キャプションの幅をコンテナ全体に */
+    text-align: center; /* キャプションを中央揃え */
+    font-style: italic; /* イタリック体で少し強調 */
+    margin-top: 10px; /* 画像との間に適度なスペースを設定 */
+}
+
+
 .special-link {
     color: #333;  /* テキストの色を白に */
     background-color: #e2e2e2;  
