@@ -120,3 +120,28 @@ figcaption {
     color: blue;  
     /* background-color: #0056b3;  ホバー時の背景色を濃い青に */
 }
+
+
+
+.github-link a {
+    display: flex;
+    align-items: center;
+    background-color: #f4f4f4;
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-decoration: none;
+    color: black;
+    border-radius: 5px;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+    margin-bottom: 10px;
+}
+
+.github-link img {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+}
+
+.github-link span {
+    font-weight: bold;
+}
