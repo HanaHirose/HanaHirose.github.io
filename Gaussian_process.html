@@ -72,7 +72,88 @@
         <p>ちなみに、一般にカーネル関数は基底関数\(\Phi(\mathbf{x})\)を使って次のように表せる。</p>
         $$ k(\mathbf{x},\mathbf{x'}) = \sum_{j=1}^{M} \Phi_j(\mathbf{x})\Phi_j(\mathbf{x'}) $$
 
+        <h3>ガウス過程事前分布からの関数のサンプリング</h3>
+        <p>\(y(\mathbf{x},\mathbf{w})=\mathbf{x}^T \Phi(\mathbf{x})\)として\(y(\mathbf{x},\mathbf{w})\)を表現するのではなく、
+            次のように、カーネル関数からなる共分散行列からランダム関数\(y(\mathbf{x})\)を表現することを考える。手順は以下の通りである。
+        </p>
+        <p>１．適当に入力ベクトル\(\mathbf{x}_1,\mathbf{x}_2,\dots,\mathbf{x}_N\)を発生させる。</p>
+        <p>２．カーネル関数を使って次のように共分散行列を作成する。\(K = (k(\mathbf{x}_n,\mathbf{x}_m))\)</p>
+        <p>３．共分散行列を固有値分解する。</p>
+        $$ K = U \mathrm{diag} (\lambda_i) U^T $$
+        <p>４．ガウス分布\(\mathcal{N}(0,1)\)からNこの独立な乱数\(r_1,r_2,\dots,r_N\)を発生する。</p>
+        <p>５．以下のようにランダム関数\(y(\mathbf{x})\)の代表点からなるベクトルを構成することができる。</p>
+        $$ y(\mathbf{x}_n) = \sum_{m=1}^N U_{nm} \sqrt{\lambda_m} r_m $$
+        $$ \mathbf{y}= U \mathrm{diag} (\sqrt{\lambda}_i) \mathbf{r} $$
+
+        <p>これまでのカーネル関数やランダム関数\(y(\mathbf{x})\)の様子はこのページの最後にあるGitHubへのリンク内のipynbファイルを参照されたい。</p>
+
+        <h2>ガウス過程による回帰</h2>
+        <h3>ガウス観測過程</h3>
+        <p>
+            これからガウス観測過程がどのようなものか見ていく。
+            \(\mathbf{x}_1,\mathbf{x}_2,\dots,\mathbf{x}_N\)に対する予測値を\(y(\mathbf{x}_1),y(\mathbf{x}_2),\dots,y(\mathbf{x}_N)\)と表し、
+            これをまとめてベクトルとして\(mathbf{y}\)と書く。観測される目標変数は\(\mathbf{t}\)である。
+        </p>
+        <p>ざっくりいえば、\(mathbf{y}\)はガウス過程で発生するが、さらにガウシアンノイズが乗り、最終的に\(\mathbf{t}\)になるというながれである。</p>
+        <p>これを以下で詳しく見てみよう。まず、観測される目標変数には次のようにノイズ\(\epsilon\)が乗る。</p>
+        $$ t_n = y_n + \epsilon_n $$
+        <p>このノイズはガウス分布に従うので、次のようにあらわせる。</p>
+        <h4>ガウス観測過程モデル</h4>
+        $$ p(\mathbf{t}|\mathbf{y}) = \mathcal{N}(\mathbf{t}| \mathbf{y}, \beta^{-1}, \mathbf{I}_N) $$
+        <p>ただし、\(\mathbf{I}_N\)は単位行列である。</p>
+        <p>また、ガウス過程の定義より、周辺分布\(p(\mathbf{y})\)は次のように、平均０，共分散が\(K\)のガウス分布になる。</p>
+        <h4>ガウス過程事前分布</h4>
+        $$ p(\mathbf{y}) = \mathcal{N}(\mathbf{y}|0, K) $$
+        <p>
+            ここで、\(K\)はカーネル関数で構成されるが、これは、
+            「お互いに似ている2つの点\(\mathbf{x}_n\)と\(\mathbf{x}_m\)に対して、
+            対応する値\(y(\mathbf{x}_n)\)と\(y(\mathbf{x}_m)\)が高い相関を持つ」
+            ということを表すように決める。
+        </p>
+        <h4>出力\(\mathbf{t}\)の周辺分布</h4>
+        <p>上で見た二つのガウス分布を合わせて積分することで出力\(\mathbf{t}\)の周辺分布が次のように分かる。</p>
+        $$ p(\mathbf{t}) = \int p(\mathbf{t}|\mathbf{y}) p(\mathbf{y}) d\mathbf{y} = \mathcal{N} (\mathbf{t}|0,C_N) $$
+        <p>このように、ガウシアンとガウシアンを掛け合わせているので、\(p(\mathbf{t}) \)もガウシアンになっている。
+            ただし、共分散\(C_N\)は、次で与えられ、単純に二つのガウス分布の共分散の足し合わせになっている。</p>
+        $$ C_N = \beta^{-1} \mathbf{I}_N + K $$
+        $$ C_N(\mathbf{x}_n,\mathbf{x}_m) = \beta^{-1} \delta_{nm} + k(\mathbf{x}_n,\mathbf{x}_m) $$
+
+        <h3>ガウス過程回帰を用いた新しい入力に対する予想</h3>
+        <p>
+            やりたいことは次の通り。訓練集合として入力 \(\mathbf{x}_1,\mathbf{x}_2,\dots,\mathbf{x}_N\)と
+            それに対応する出力値\(\mathbf{t}_N = (t_1,t_2, \dots, t_n) \)が与えらえているときに、
+            新しい入力\(\mathbf{x}_{N+1}\)に対する目標変数\(t_{N+1}\)を予想したい。
+        </p>
+        $$ \mathbf{t}_{N+1} = (\mathbf{t}_{N}^T, t_{N+1})^T = (t_1, t_2, \dots, t_N, t_{N+1}) $$
+
+        <p>
+            そのためには、予測分布、つまり\(t_{N+1}\)の事後分布が分かればいい。
+            これは多変量正規分布の公式を使って計算すると次のように得られる。
+        </p>
+        $$ p(t_{N+1}|\mathf{t}_N) = \frac{p(\mathbf{t}_{N+1})}{p(\mathbf{t}_{N})} = \mathcal{N} (t_{N+1}| m_{N+1}, \sigma_{N+1}^2) $$
+        <p>ただし、</p>
+        $$ m_{N+1} = \mathbf{k}^T C_N \mathbf{t}_N $$
+        $$ \sigma_{N+1}^2 = \beta^{-1} + k(\mathbf{x}_{N+1},\mathbf{x}_{N+1}) - \mathbf{k}^T C_N^{-1} \mathbf{k} $$
+        <p>である。これを導出する途中で、結合分布</p>
+        $$ p(\mathbf{t}_{N+1} ) = \mathcal{N}(\mathbf{t}_{N+1}|0, C_{N+1}) $$
+        $$ C_{N+1} = 
+        \begin{pmatrix}
+        C_N & \mathbf{k} \\
+        \mathbf{k}^T & c \\
+        \end{pmatrix}
+        $$
+        <p>を使った。ただし、\(c=\beta^{-1}+k(\mathbf{x}_{N+1},\mathbf{x}_{N+1}) \)である。</p>
+        <p>以上のように、無事、誤差付きで\(\mathbf{t}_N\)から\(\mathbf{t}_{N+1}\)を回帰することができた。</p>
+
+        <h3>ガウス過程による回帰の例</h3>
         
+    </div>
+
+    <div class="gallery">
+        <figure>
+            <img src="figures/Figure4.9.jpg" alt="ロジスティックシグモイド関数" width="300">
+            <figcaption>Figure 1: ロジスティックシグモイド関数（C.M. Bishop, PRML, 2006）</figcaption>
+        </figure>
     </div>
 
 
