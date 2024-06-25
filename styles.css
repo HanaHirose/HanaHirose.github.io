@@ -134,16 +134,25 @@ figcaption {
 
 
 .github-link a {
-    display: flex;
-    align-items: center;
+    display: block;
+    align-items: start;
     background-color: #f4f4f4;
     border: 1px solid #ccc;
     padding: 10px;
     text-decoration: none;
     color: black;
     border-radius: 5px;
-    box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
-    margin-bottom: 10px;
+    /* box-shadow: 2px 2px 5px rgba(0,0,0,0.2); */
+    margin-bottom: 50px;
+}
+
+.github-link .link-header {
+    display: flex;
+    align-items: center;
+}
+
+.github-link a:hover {
+    background-color: #e0e0e0; /* ホバー時の背景色を少し濃い色に変更 */
 }
 
 .github-link img {
@@ -154,4 +163,13 @@ figcaption {
 
 .github-link span {
     font-weight: bold;
+}
+
+
+.github-link .link-url {
+    
+    font-size: 12px; /* 小さいフォントサイズで十分 */
+    color: #555; /* 薄めのグレーで控えめに */
+    margin: 5px 5px; /* 上下に少しマージンを設定 */
+    overflow-wrap: break-word; /* 長いURLを折り返し */
 }
