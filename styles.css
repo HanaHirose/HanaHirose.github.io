@@ -20,27 +20,35 @@ header {
     align-items: center; 
 }
 
- nav {
-    /* background-color: #f8f8f8;  */
-    padding: 10px; 
+nav {
+    display: flex;
+    justify-content: center;
+    padding: 10px, 0; 
+    width: 100%;
     /* width: 200px;  */
-    text-align: center;
-    align-items: center; 
+    text-align: left;
+
  } 
 
+.nav-container {
+    text-align: left;
+    max-width: 600px; /* 適切な最大幅を設定 */
+    width: 100%;
+}
+
 nav h2 {
-    text-align: center; /* 見出しを中央揃えに */
-    margin-top: 0; /* 上のマージンを無くす */
+    margin-top: 10px; 
+    width: 100%;
 }
 
 nav ul {
     list-style-type: none;
-    padding: 10px;
-    /* width: 200px; */
-   
+    padding: 0;
+    margin: 0;
 }
 
 nav ul li {
+    margin-bottom: 10px;
     /* display: inline; */
     /* margin-right: 20px; */
    
@@ -57,6 +65,26 @@ nav ul li a {
 nav ul li a:hover {
     color: blue;  
 }
+
+
+.reference-list {
+    list-style-type: disc; /* 点をリストマーカーとして使用 */
+    padding-left: 40px; /* リストの左パディングを設定 */
+    margin-left: auto; /* 自動マージンで左に配置 */
+    margin-right: auto; /* 自動マージンで右に配置 */
+    width: fit-content; /* コンテンツの幅に合わせて調整 */
+}
+
+.reference-list li {
+    text-align: left; /* テキストを左揃え */
+    margin-bottom: 10px; /* リストアイテム間のマージン */
+}
+
+.reference-list li a {
+    text-decoration: none; /* リンクの下線を消す */
+    color: #333; /* リンクの色を設定 */
+}
+
 
 h2 {
     margin-top: 40px;  /* 上部のマージンを40pxに設定 */

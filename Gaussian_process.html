@@ -1,0 +1,95 @@
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Topic 1</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+</head>
+<body>
+    <header>
+        <h1>ガウス過程</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html" class="special-link">Back to Home</a></li>
+            </ul>
+        </nav>
+        <nav>
+            <ul>
+                <li><a href="model_selection.html" >＜前へ：モデル、ハイパーパラメータの選択</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div>
+        <h2>ガウス過程とは</h2>
+         <h3>線形基底モデルの復習</h3>
+        <p>
+            以前、\(y(\mathbf{x},\mathbf{w})=\mathbf{x}^T \Phi(\mathbf{x})\)と仮定することで線形回帰モデルを考えた。
+            観測データへのフィッティングをすることでパラメータ\(\mathbf{w}\)を決定した。
+            その際、基底関数\(\Phi(\mathbf{x})\)は人間がうまく決めてやる必要があった。
+        </p>
+        <h3>ガウス過程の導入</h3>
+        <p>
+            基底関数を直接与えるのではなく、別のアプローチとしてガウシアン過程というものがある。
+            これは、任意の入力データの組\(\mathbf{x}_1,\mathbf{x}_2, \dots, \mathbf{x}_N\)に対応する
+            関数値\(y(\mathbf{x}_1),y(\mathbf{x}_2),\dots,y(\mathbf{x}_N)\)
+            が\(N\)次元のガウス分布に従う確率変数であるとしてモデリングする方法である。
+        </p>
+        <p>
+            平均は\(m(\mathbf{x}_1),m(\mathbf{x}_2),\dots,m(\mathbf{x}_N)\)だが、０と置く場合が多い。
+        </p>
+        <p>
+            共分散が重要で、これは次のように書ける。
+        </p>
+        $$ K =
+        \begin{pmatrix}
+        k(\mathbf{x}_1,\mathbf{x}_1) & k(\mathbf{x}_1,\mathbf{x}_2) & \dots & k(\mathbf{x}_1,\mathbf{x}_N)\\
+        k(\mathbf{x}_2,\mathbf{x}_1) & k(\mathbf{x}_2,\mathbf{x}_2) & \dots & k(\mathbf{x}_2,\mathbf{x}_N)\\
+        \vdots & \vdots & \ddots & \vdots \\
+        k(\mathbf{x}_N,\mathbf{x}_1) & k(\mathbf{x}_N,\mathbf{x}_2) & \dots &k(\mathbf{x}_N,\mathbf{x}_N)\\
+        \end{pmatrix}
+        $$
+        <p>
+            ただし、\(k(\mathbf{x},\mathbf{x'})\)はカーネル関数である。
+            特に、ガウス過程においては共分散行列\(K\)が半正定値（すべての固有値が非負）である必要がある。
+            \(k(\mathbf{x},\mathbf{x'})\)として、正定値カーネルという特別なカーネル関数を選んでやればよい。
+        </p>
+
+        <h3>正定値カーネルの例</h3>
+        <p>代表的な正定値カーネルの例として、以下のような関数がある。</p>
+        <h4>Gaussian カーネル</h4>
+        $$ k(\mathbf{x},\mathbf{x'}) = \exp{- \gamma \|\mathbf{x}-\mathbf{x'}\|_2^2} \quad ( \gamma > 0) $$
+        <h4>Matern カーネル</h4>
+        $$ k(\mathbf{x},\mathbf{x'}) = \frac{1}{\Gamma(\nu)2^{\nu-1}} \left( \frac{\sqrt{2\nu}}{l} \|\mathbf{x}-\mathbf{x'} \|_2^2 \right)^\nu K_\nu \left( \frac{\sqrt{2\nu}}{l} \|\mathbf{x}-\mathbf{x'} \|_2^2 \right) $$
+        <h4>Rational Quadratic カーネル</h4>
+        $$ k(\mathbf{x},\mathbf{x'}) = \left( 1+ \frac{ \|\mathbf{x}-\mathbf{x'} \|_2^2 }{ 2 \alpha l^2 } \right)^{-\alpha} $$
+        <h4>DotProduct カーネル</h4>
+        $$ k(\mathbf{x},\mathbf{x'}) = \sigma_0^2 + \mathbf{x}\cdot \mathbf{x'} $$
+
+        <h3>カーネル関数</h3>
+        <p>ちなみに、一般にカーネル関数は基底関数\(\Phi(\mathbf{x})\)を使って次のように表せる。</p>
+        $$ k(\mathbf{x},\mathbf{x'}) = \sum_{j=1}^{M} \Phi_j(\mathbf{x})\Phi_j(\mathbf{x'}) $$
+
+        
+    </div>
+
+
+    
+    <footer>
+        <nav>
+            <ul>
+                <li><a href="model_selection.html" >＜前へ：モデル、ハイパーパラメータの選択</a></li>
+            </ul>
+        </nav>
+        <nav>
+            <ul>
+                <li><a href="index.html" class="special-link">Back to Home</a></li>
+            </ul>
+        </nav>
+
+        <p>© 2024 Hana Hirose. All rights reserved.</p>
+    </footer>
+</body>
+</html>
