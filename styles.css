@@ -1,7 +1,7 @@
 
 body {
     width: 100%; /* ビューポートの幅全体を使用 */
-    max-width: 1200px; /* 最大幅を1200pxに設定 */
+    max-width: 1000px; /* 最大幅を1200pxに設定 */
     margin: 0 auto; /* 自動マージンで中央揃え */
     font-family: Arial, sans-serif;
     padding: 10px 100px; /* 上下に10px、左右に20pxのパディングを追加 */
