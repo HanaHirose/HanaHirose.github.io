@@ -1,0 +1,60 @@
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Topic 1</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+</head>
+<body>
+    <header>
+        <h1>ガウス過程（続き）</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html" class="special-link">Back to Home</a></li>
+            </ul>
+        </nav>
+        <nav>
+            <ul>
+                <li><a href="Gaussian_process.html" >＜前へ：ガウス過程</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div>
+        <h2>ガウス過程による分類</h2>
+         <h3>ガウス過程を分類問題に適応する</h3>
+         <p>
+            前ページではガウス過程を使って回帰を行うことを見たが、ガウス過程の出力を適切な非線形の活性化関数で変換することで、
+            簡単にガウス過程を分類問題に用いることができる。
+        </p>
+        <p>
+            目標変数がYes/Noの2クラス分類問題を考える。\(t \in \{0,1\}\)である。
+            回帰では\(y(\mathbf{x})\)としていた関数の代わりに関数\(a(\mathbf{x})\)の上でガウス過程を定義する。
+            そして、ガウス過程で得られたサンプル関数\(a(\mathbf{x})\)をロジスティックシグモイド関数\(y=\simga(a)\)で変換することで
+            \(y \in (0,1)\)であるような関数\(y(\mathbf{x})\)を得る。
+        </p>
+        <p>以前、ロジスティック回帰でみた通り、目標関数\(t\)の確率分布は次のベルヌーイ分布で与えられる。</p>
+        $$ p(t|a) = \sigma(a)^t(1-\sigma(a))^{1-t} $$
+        
+
+
+    </div>
+
+    <footer>
+        <nav>
+            <ul>
+                <li><a href="Gaussian_process.html" >＜前へ：ガウス過程</a></li>
+            </ul>
+        </nav>
+        <nav>
+            <ul>
+                <li><a href="index.html" class="special-link">Back to Home</a></li>
+            </ul>
+        </nav>
+
+        <p>© 2024 Hana Hirose. All rights reserved.</p>
+    </footer>
+</body>
+</html>
