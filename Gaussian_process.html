@@ -73,6 +73,23 @@
         <p>ちなみに、一般にカーネル関数は基底関数\(\Phi(\mathbf{x})\)を使って次のように表せる。</p>
         $$ k(\mathbf{x},\mathbf{x'}) = \sum_{j=1}^{M} \Phi_j(\mathbf{x})\Phi_j(\mathbf{x'}) $$
 
+    </div>    
+
+    <div class="gallery">
+        <figure>
+            <img src="figures/Kernel_1D.png" alt="代表的なカーネル関数" width="800">
+            <figcaption>Figure 1: 代表的なカーネル関数（\(x'\)は固定している）</figcaption>
+        </figure>
+    </div>
+
+    <div class="gallery">
+        <figure>
+            <img src="figures/Heatmap_Kernel.png" alt="代表的なカーネル関数（ヒートマップ）" width="800">
+            <figcaption>Figure 2: 代表的なカーネル関数（ヒートマップ）</figcaption>
+        </figure>
+    </div>
+
+    <div>
         <h3>ガウス過程事前分布からの関数のサンプリング</h3>
         <p>\(y(\mathbf{x},\mathbf{w})=\mathbf{x}^T \Phi(\mathbf{x})\)として\(y(\mathbf{x},\mathbf{w})\)を表現するのではなく、
             次のように、カーネル関数からなる共分散行列からランダム関数\(y(\mathbf{x})\)を表現することを考える。手順は以下の通りである。
@@ -86,8 +103,16 @@
         $$ y(\mathbf{x}_n) = \sum_{m=1}^N U_{nm} \sqrt{\lambda_m} r_m $$
         $$ \mathbf{y}= U \mathrm{diag} (\sqrt{\lambda}_i) \mathbf{r} $$
 
-        <p>これまでのカーネル関数やランダム関数\(y(\mathbf{x})\)の様子はこのページの最後にあるGitHubへのリンク内のipynbファイルを参照されたい。</p>
-
+    </div>
+    
+    <div class="gallery">
+        <figure>
+            <img src="figures/RandomFunc_Kernel.png" alt="カーネル関数から生成したランダム関数" width="800">
+            <figcaption>Figure 3: カーネル関数から生成したランダム関数の様子）</figcaption>
+        </figure>
+    </div>
+    
+    <div>
         <h2>ガウス過程による回帰</h2>
         <h3>ガウス観測過程</h3>
         <p>
@@ -167,8 +192,8 @@
 
     <div class="gallery">
         <figure>
-            <img src="figures/Figure6.8.jpg" alt="ガウス過程による回帰" width="300">
-            <figcaption>Figure 1: ガウス過程による回帰（C.M. Bishop, PRML, 2006）</figcaption>
+            <img src="figures/Gaussian_Process_Regression.png" alt="ガウス過程による回帰" width="300">
+            <figcaption>Figure 4: ガウス過程による回帰</figcaption>
         </figure>
     </div>
 
