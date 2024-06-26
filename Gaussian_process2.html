@@ -24,8 +24,8 @@
     </header>
     <div>
         <h2>ガウス過程による分類</h2>
-         <h3>ガウス過程を分類問題に適応する</h3>
-         <p>
+        <h3>ガウス過程を分類問題に適応する</h3>
+        <p>
             前ページではガウス過程を使って回帰を行うことを見たが、ガウス過程の出力を適切な非線形の活性化関数で変換することで、
             簡単にガウス過程を分類問題に用いることができる。
         </p>
@@ -37,7 +37,73 @@
         </p>
         <p>以前、ロジスティック回帰でみた通り、目標関数\(t\)の確率分布は次のベルヌーイ分布で与えられる。</p>
         $$ p(t|a) = \sigma(a)^t(1-\sigma(a))^{1-t} $$
+        <h3>\(\mathbf{a}_{N+1}\)に対するガウス過程による事前分布</h3>
+        <p>\(\mathbf{a}_{N+1}\)の事前分布は以下の形をとる。</p>
+        $$ p(\mathbf{a}_{N+1}) = \mathcal{N} (\mathbf{a}_{N+1}|0,\mathbf{C}_{N+1}) $$
+        <p>
+            ただし、ガウス過程による回帰の時とは異なり、訓練データのラベルは0か1であって誤差がないので、ガウシアンノイズは乗ってこない。
+            しかし、数値的な安定のためにノイズなような小さな項\(\nu\)を便宜上いれておくいれておく。
+            共分散行列\(\mathbf{C}_{N+1}\)の各要素は以下のようになる。 
+        </p>
+        $$C(\mathbf{x}_n,\mathbf{x}_m) = k(\mathbf{x}_n,\mathbf{x}_m) + \nu \delta_{nm} $$
+        <p>
+            ここで\(k(\mathbf{x}_n,\mathbf{x}_m)\)は半正定値カーネル関数である。
+            カーネル関数\(k(\mathbf{x}_n,\mathbf{x}_m)\)はハイパーパラメータ\(\theta\)によって決定される。
+        </p>
+        <h3>求めたい予測分布</h3>
+        <p>2クラス分類問題では\(p(t_{N+1}=0|\mathbf{t}_N) = 1 - p(t_{N+1}=1|\mathbf{t}_N) \)で与えらえるから、\(p(t_{N+1}=1|\mathbf{t}_N)\)を求めれば十分である。</p>
+        <p>求めるべき予測分布は以下の通り。</p>
+        $$ p(t_{N+1}=1|\mathbf{t}_N) = \int p(t_{N+1}=1|a_{N+1}) p(a_{N+1}|\mathbf{t}_N) da_{N+1} $$
+        <p>上記の積分の中身のうちの左側の確率分布は\( p(t_{N+1}=1|a_{N+1})=\sigma(a_{N+1}) \)で与えられる。</p>
+        <p>この積分を解析的に求めることはできないので、以下で見ていく通り、積分の中の右側の確率分布をラプラス近似を用いてガウシアンで近似して求める。</p>
 
+        <h3>ラプラス近似</h3>
+        <P>
+            上で見た近似して評価したい確率分布は以下の通りに変形できる。
+            ただし、\(p(\mathbf{t}_N|a_{N+1},\mathbf{a}_N)=p(\mathbf{t}_N|\mathbf{a}_N)\)とベイズの定理を用いた。
+        </P>
+        $$ p(a_{N+1}|\mathbf{t}_N) = \int p(a_{N+1}|\mathbf{a}_N) p(\mathbf{a}_N|\mathbf{t}_N) d\mathbf{a}_N $$
+        <p>積分の中の左側の確率分布については前ページでみたガウス過程を用いた回帰で求めた結果を使って以下の通り得られる。</p>
+        $$  p(a_{N+1}|\mathbf{a}_N) = \mathcal{N} (a_{N+1}| \mathbf{k}^T \mathbf{C}_N^{-1} \mathbf{a}_N, c-\mathbf{k}^T \mathbf{C}_N^{-1}\mathbf{k}) $$
+        <p>
+            よって、今後の流れは、先ほどの積分の右側の確率分布である事後分布\(p(\mathbf{a}_N|\mathbf{t}_N)\)にラプラス近似をもちいてガウス分布で近似し、
+            二つのガウシアンの掛け合わせを畳み込みして、\(p(a_{N+1}|\mathbf{t}_N)\)のガウス分布による近似を得る。
+            そして最終的に\( p(t_{N+1}=1|a_{N+1})=\sigma(a_{N+1}) \)と掛け合わせて公式を用いて積分することで、求めるべき予測分布\(p(t_{N+1}=1|\mathbf{t}_N)\)を得る。
+        </p>
+        <h4>\(p(\mathbf{a}_N|\mathbf{t}_N)\)の対数</h4>
+        <p>\(p(\mathbf{a}_N|\mathbf{t}_N)\)の対数は次のように書ける</p>
+        $$ 
+        \begin{align*}
+        \Psi ( \mathbf{a}_N) 
+        &= \ln p(\mathbf{a}_N) + \ln p(\mathbf{t}_N|\mathbf{a}_N) \\
+        &= -\frac{1}{2} \mathbf{a}_N^T \mathbf{C}_N^{-1} \mathbf{a}_N - \frac{N}{2} \ln (2 \pi) - \frac{1}{2} \ln | \mathbf{C}_N | + \mathbf{t}_N^T \mathbf{a}_N - \sum_{n=1}^N \ln (1+ e^{a_n})
+        \end{align*}
+        $$
+        <p>これは最後の項を除くとガウシアンになっている。</p>
+        <h4>事後分布のラプラス近似</h4>
+        <p>\(\Psi( \mathbf{a}_N) \)を最大点の周りで2次までテイラー展開する（ラプラス近似）。
+        </p>
+        <p>まず、最大点の探索をする。</p>
+        $$ \frac{\partial \Psi( \mathbf{a}_N)}{\partial a_n} = t_n - \sigma(a_n) - (\mathbf{C}_N^{-1}\mathbf{a}_N)_n $$
+        <p>これが０となる点をニュートン法などで解いて求める。求めた最大点を\(\mathbf{a}_N = \mathbf{a}_N^* \)置く。</p>
+        <p>次に2次までの近似を行う。</p>
+        $$ 
+        \begin{align*}
+        \left. \frac{\partial^2 \Psi( \mathbf{a}_N)}{\partial a_m \partial a_n} \right|_{\mathbf{a}_N = \mathbf{a}_N^*} 
+        &= \left. \frac{\partial (C^{-1} \mathbf{a}_N)_n}{a_m} \right|_{\mathbf{a}_N = \mathbf{a}_N^*}
+        - \left.\frac{\partial \sigma(a_n)}{\partial a_m}  \right|_{\mathbf{a}_N = \mathbf{a}_N^*} \\
+        &= (C^{-1})_{mn} - \delta_{mn} \sigma(a_n^*)(1- \sigma(a_n^*)) \\
+        & = - (H_N)_{mn}
+        \end{align*}
+        $$
+        <p>ただし、ヘッセ行列\(H_N\)を定義した。</p>
+        <p>以上の結果を使うと、事後分布\(p(\mathbf{a}_N|\mathbf{t}_N)\)を以下のようにガウス分布で近似できる。</p>
+        $$ p(\mathbf{a}_N|\mathbf{t}_N) \simeq \mathcal{N} (\mathbf{a}_N|\mathbf{a}_N^*,H_N^{-1}) $$
+        <p>これより\(p(\mathbf{a}_{N+1}|\mathbf{t}_N)\)を書き下した積分の中身は二つのガウス分布の掛け合わせで近似でき、以下の通り結果を得る。</p>
+        $$ \mathbb{E}[a_{N+1}|\mathbf{t}_N] = \mathbf{k}^T(\mathbf{t}_N-\mathbf{\sigma}_N) $$
+        $$ \mathrm{var}[a_{N+1}|\mathbf{t}_N] = c- \mathbf{k}^TH_N \mathbf{k} $$
+        <p>また、ハイパーパラメータは以下の対数尤度関数の近似を求めて、これを最大化することで得られる。</p>
+        $$ \ln p( \mathbf{t}_N) \simeq \Psi (\mathbf{a}_N^*) - \frac{1}{2} \ln \det{H} + \frac{H}{2} \ln (2\pi) + const. $$
 
 
     </div>
