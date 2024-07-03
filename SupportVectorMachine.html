@@ -83,10 +83,88 @@
         <p>したがって、分類境界から点\(\mathbf{x}_n\)までの距離は次のようにあらわせる。</p>
         $$ \frac{t_n y(\mathbf{x}_n)}{\|\mathbf{w}\|} = \frac{t_n ( \mathbf{w}^T \Phi (\mathbf{x}_n)+b)}{\|\mathbf{w}\|}$$
         <p>マージンは訓練データと分離境界の最短距離であり、求めたいのは、そのマージンを最大化するパラメータ\(\mathbf{w}とb\)である。</p>
+        <p>したがって、次の最適化問題を解けばよい。</p>
+        $$ 
+        \underset{\mathbf{w},b} {\operatorname{argmax}}  \left\{ \frac{1}{\|\mathbf{w}\|} \operatorname{min} [t_n( \mathbf{w}^T\Phi(\mathbf{x}_n)+b)]  \right\} $$
+        <p>ここで、超平面を表す式は全体を定数倍しても不変なので、適当に定数倍することによって、境界に最も近い点について</p>
+        $$ t_n ( \mathbf{w}^T \Phi (\mathbf{x}_n)+b) = 1 $$
+        を成立させることが出来る。このスケールのもとでは、すべてのデータ点について次の制約式が成立する。
+        $$ t_n ( \mathbf{w}^T \Phi (\mathbf{x}_n)+b) \geqslant 1, \qquad n=1, \dots , N $$
+        <p>このスケールのもとで、解くべき問題は以下のようになる。</p>
+        $$ \underset{\mathbf{w},b} {\operatorname{min}} \frac{1}{2} \| \mathbf{w} \|^2 
+        \quad \operatorname{subj.to} t_n ( \mathbf{w}^T \Phi (\mathbf{x}_n)+b) \geqslant 1 \quad (n=1, \dots , N) $$
+        <p>
+            これは線形制約下での凸問題（２次関数）の最適化問題である。
+            ローカルミニマムがないので、解は必ず大域最適解になるという嬉しいことがある。
+            また、計算パッケージを使えば比較的簡単に解ける。
+        </p>
 
+        <h3>ラグランジュ未定乗数法の一般化</h3>
+        <p>
+            この制約付き最適化問題を解くために、ラグランジュ乗数を一般化した\(a_n \geqslant 0\)を導入すると、次のラグランジュ関数が得られる。
+        </p>
+        $$ L(\mathbf{w},b,\mathbf{a}) = \frac{1}{2} \|\mathbf{w}\|^2 - \sum_{n=1}^{N} a_n \{t_n(\mathbf{w}^T \Phi(\mathbf{x}_n)+b)-1 \} $$
+        <p>ここで\(\mathbf{a}=(a_1, \dots a_N) \)である。ラグランジュ乗数を一般化した\(a_n \geqslant 0\)はしばしばKarush-Kuhn-Tucker(KKT)乗数と呼ばれる。</p>
+        
+        <h3>双対問題への書き換え</h3>
+        <p>
+            \(Lを\mathbf{w}とb\)について１回微分した後、そｒを０に等しい遠くと２つの条件を得る。
+            それらを\(L\)に代入し、\(\mathbf{w}とb\)を消去すると、次のような双対表現を得る。
+        </p>
+        $$ \tilde{L} = \sum_{n=1}^N a_n - \frac{1}{2} \sum_{n=1}^N a_n \sum_{m=1}^N a_n a_m t_n t_m k(\mathbf{x}_n,\mathbf{x}_m) $$
+        <p>これを制約のもと最大化すればいい。つまり、得べき双対問題は以下のとおりである。</p>
+        $$ \underset{\mathbf{a}} {\operatorname{max}} \left\{ \sum_{n=1}^N a_n - \frac{1}{2} \sum_{n=1}^N a_n \sum_{m=1}^N a_n a_m t_n t_m k(\mathbf{x}_n,\mathbf{x}_m) \right\} $$
+        $$ \operatorname{subj.to} a_n \geqslant 0 \quad (n=1, \dots , N), \quad  \sum_{n=1}^N t_n a_n =0 $$
+        <p>ただし、\(k(\mathbf{x}_n,\mathbf{x}_m) = \phi(\mathbf{x}_n) \cdot \phi(\mathbf{x}_m) = \sum_{j=1}^{M}\phi_j(\mathbf{x}_n)\phi_j(\mathbf{x}_m)\)であり、これは（ガウス過程で出てきた）カーネル関数である。</p>
 
-
+        <h3>リマーク１</h3>
+        <p>\(\mathbf{a}\in\mathbb{R}^N\)に関する２次最適化問題なので、特徴空間の次元Mによらず必要計算量が低い（カーネルトリック）という利点がある。</p>
+        <h3>リマーク２</h3>
+        最適解は制約に関する以下の条件（KKT条件）を満たす
+        <h4>KKT条件</h4>
+        $$ a_n \geqslant 0 $$
+        $$ t_n y(\mathbf{x}_n) -1 \geqslant 0 $$
+        $$ a_n \{t_ny(\mathbf{x}_n) -1\} =0 $$
+        <p>ここで注目したいのは、すべてのデータ点について\(a_n=0またはt_ny(\mathbf{x}_n)=1\)が成り立っているということである。
+            \(a_n=0\)は新しいデータ点への予測に影響しないということである。
+            一方、\(a_n\neq0\)のデータ点はサポートベクトルと呼ばれ、以下の図に丸印で示した通り、特徴空間のちょうどマージンの縁に存在していて、\(t_ny(\mathbf{x}_n)=1\)が成り立っている。
+        </p>
     </div>
+
+    <div class="gallery">
+        <figure>
+            <img src="figures/Figure7.1b.jpg" alt="サポートベクトル" width="400">
+            <figcaption>Figure 2: サポートベクトル（C.M. Bishop, PRML, 2006）</figcaption>
+        </figure>
+    </div>
+        <h3>リマーク３</h3>
+        <p>実は、実際上、特徴空間でのパラメータ\(\mathbf{w},b\)を求める必要はない。分類の予測値はすべてカーネル関数を使って以下のように表現される。</p>
+        $$ y(\mathbf{x}) = \sum_{n=1}^N a_n t_n k(\mathbf{x},\mathbf{x}_n)+b $$
+    <div>
+        <p>
+            学習したモデルを用いて新しい点を分類するには\(y(\mathbf{x})\)を計算してその符合を調べればよい。\(y(\mathbf{x})
+            はラグランジュ関数の微分を０とおいた結果をつかって\mathbf{w}\)を消去することで、次のようにパラメータ\(\{a_n\}\)とカーネル関数で表現される。
+        </p>
+        $$ y(\mathbf{x}) = \sum_{n=1}^N a_n t_n k(\mathbf{x},\mathbf{x}_n)+b $$
+        $$ b = \frac{1}{N_S} \sum_{n \in S} \left( t_n - \sum_{m \in S} a_m t_m k(\mathbf{x}_n,\mathbf{x}_m) \right) $$
+
+        <p>VC次元の議論から、特徴空間の次元が\(M\)の場合、サポートベクトルマシン（SVM）は\(M+1\)個の任意の関係を表現することができる。</p>
+        <p>つまり、\(M=\infty\)に対応する無限次元カーネルを使えば、任意のデータセットをデータ数\(N\)に関して\(O(N^3)\)程度の計算量で誤りなしに分類できることを意味している。</p>
+
+
+        <p>以下の図は、ガウスカーネルを用いたSVMを２クラスの人工データに適応した例である。等高線は\(y(\mathbf{x})\)の値が等しい点を表し、分類境界は太線、マージンの境界は普通の太線で示してある。緑の丸で囲まれた点はサポートベクトルである。</p>
+    </div>
+    <div class="gallery">
+        <figure>
+            <img src="figures/Figure7.2.jpg" alt="ガウスカーネルSVM" width="400">
+            <figcaption>Figure 3: ガウスカーネルSVM（C.M. Bishop, PRML, 2006）</figcaption>
+        </figure>
+    </div>
+
+
+        
+
+   
 
 
 
