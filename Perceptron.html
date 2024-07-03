@@ -33,16 +33,50 @@
 
         <h2>パーセプトロン</h2>
         <p>1958年にRosenblattが提案した一番初めの機械学習で、線形識別モデルである。</p>
-        <p>パーセプトロンは複数の信号を入力として受け取り、ニューロン（数の丸）に送られる際に重みづけ\(\mathbf{w}\)をする。</p>
+
+    </div>
+
+    <div class="gallery">
+        <figure>
+            <img src="figures/Perpeptron_picture.png" alt="パーセプトロン" width="600">
+            <figcaption>Figure 1: パーセプトロンの写真（C. Bishop, PRMLより）</figcaption>
+        </figure>
+    </div>
+
+    <div>
+        <p>パーセプトロンは複数の信号を入力として受け取り、ニューロン（下図の丸）に送られる際に重みづけ\(\mathbf{w}\)をする。</p>
         <p>ニューロンでは送られてきた信号の総和が計算され、その総和が閾値\(\theta\)を超えたら「ニューロンが発火」つまり１を返す。</p>
     </div>
 
     <div class="gallery">
         <figure>
-            <img src="figures/Preceptron.png" alt="パーセプトロン" width="300">
-            <figcaption>Figure 1: パーセプトロン</figcaption>
+            <img src="figures/Preceptron.png" alt="パーセプトロン写真" width="300">
+            <figcaption>Figure 2: パーセプトロン</figcaption>
         </figure>
     </div>
+
+    <div>
+        <p>
+            これを式で表すと、以下のようにステップ関数を用いて表すことができる。
+        </p>
+        $$ y(\mathbf{x},\mathbf{w}) = \Theta(\mathbf{w}\cdot \mathbf{x} - \theta) $$
+        <p>入出力関係の具体例を表すデータセットに基づいて、その関係を再現するパラメータ\(\mathbf{w},\theta\)を定めて学習する。</p>
+
+    </div>
+
+    <div>
+        <h3>パーセプトロンの収束定理</h3>
+        <p>
+            線形分離可能な入出力関係の具体的なセットが与えられたとする。
+            このとき、パーセプトロンは、パーセプトロンアルゴリズムにより、その関係を再現するパラメータ\(\mathbf{w},\theta\)を有限時間内で見つけることができると保証されている。
+        </p>
+        <h3>パーセプトロンの限界</h3>
+        <p>残念ながら、一般の分類問題は線形分離可能ではない。その場合、パーセプトロンアルゴリズムは停止せず、準最適な解を見つける（つまり、少しの間違いは許すということ）こともできない。</p>
+        <p>このような限界が明らかになったため、パーセプトロンブームは1960年代末に収束した。</p>
+    </div>
+
+
+
 
 
 
