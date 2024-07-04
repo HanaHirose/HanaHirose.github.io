@@ -110,6 +110,15 @@ footer {
     margin-bottom: 20px;
     width: 100%; /* 画面幅全体を使う */
 }
+
+.gallery-books {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    width: 100%; /* 画面幅全体を使う */
+}
+
 figure {
     margin: 0 10px; /* 各figureの左右のマージン */
 }
