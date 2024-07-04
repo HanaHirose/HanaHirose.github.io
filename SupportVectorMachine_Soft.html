@@ -128,10 +128,23 @@
         <p>
             他には、one-versus-oneという方式もある。
             これは、すべてのクラスの組み合わせについて２クラスSVMを学習し、その結果得られた\(K(K-1)/2\)個の分類器を適応して、「投票」が一番多かったものを最終的な出力にするというものである。
-            しかし、\(K(K-1)/2\)個の分類器が必要なので、計算コストが高いという問題点はある。
+            ただし、\(K(K-1)/2\)個の分類器が必要なので、計算コストが高いという問題点はある。
         </p>
     </div>
 
+    <div>
+        <h2>実装の例</h2>
+        <p>以下ではサポートベクトルマシンによる分類の例を示している。ソフトマージンを使って簡単な二次元入力での２クラス分類をし、ノートブックの最後ではアヤメという花の分類をしている。</p>
+    </div>
+    <div class="github-link">
+        <a href="https://github.com/HanaHirose/ML_Self_Study/tree/main/SupportVectorMachine_iris" target="_blank">
+            <div class="link-header">
+                <img src="figures/github-mark.png" alt="GitHub Logo">
+                <span>GitHub：サポートベクトルマシンによる分類</span><br>    
+            </div>
+            <p class="link-url">https://github.com/HanaHirose/ML_Self_Study/tree/main/SupportVectorMachine_iris</p>
+        </a>
+    </div>
 
 
 
